@@ -1,3 +1,5 @@
+const { all } = require("../routes/personRouter");
+
 const data = {};
 data.person = require("../models/personModel");
 module.exports.getAllPerson = (req, res, next) => {
@@ -23,4 +25,12 @@ module.exports.saveAUser = (req, res) => {
   allUser.push(req.body);
   res.send(allUser);
   //   const newUser = allUser.find(user => user = -1)
+};
+
+module.exports.updateARandomUser = (req, res) => {
+  const { id } = req.params;
+  const allUser = data.person;
+  let existUser = allUser.find((user) => user._id == id);
+  existUser = req.body;
+  res.send(existUser);
 };
