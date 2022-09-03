@@ -15,16 +15,18 @@ module.exports.getRandomUser = (req, res, next) => {
 
 module.exports.saveAUser = (req, res) => {
   const allUser = data.person;
-  console.log(req.body._id);
-  //   const id = req.body.id;
-  //   const users = allUser.map((user) => user._id);
-  //   if (users == id) {
-  // } else {
+  //   const { id } = req.params;
+  //   console.log(id);
+  //   //   const id = req.body.id;
+  //   const users = allUser.find((user) => user._id);
+  //   console.log(users);
+  //   if (users._id == id) {
+  //    res.send
+  //   } else {
   //     res.send("user already exists");
-  // }
+  //   }
   allUser.push(req.body);
   res.send(allUser);
-  //   const newUser = allUser.find(user => user = -1)
 };
 
 module.exports.updateARandomUser = (req, res) => {
@@ -33,4 +35,21 @@ module.exports.updateARandomUser = (req, res) => {
   let existUser = allUser.find((user) => user._id == id);
   existUser = req.body;
   res.send(existUser);
+};
+module.exports.updateMultipleUser = (req, res) => {
+  const allUser = data.person;
+  const newUser = req.body;
+  allUser.push(newUser);
+
+  res.send(allUser);
+};
+
+module.exports.deleteUser = (req, res) => {
+  const { id } = req.params;
+  let allUser = data.person;
+  const filter = { _id: id };
+
+  allUser = allUser.filter((user) => user._id != id);
+
+  res.send(allUser);
 };
